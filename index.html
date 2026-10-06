@@ -1,0 +1,982 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pousada R Marques</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --azul-escuro: #0f172a;
+            --azul-primario: #1e3a8a;
+            --azul-medio: #2563eb;
+            --azul-claro: #dbeafe;
+            --azul-suave: #eff6ff;
+            --amarelo-primario: #fbbf24;
+            --amarelo-escuro: #f59e0b;
+            --amarelo-claro: #fef3c7;
+            --branco: #ffffff;
+            --branco-off: #f8fafc;
+            --cinza-texto: #334155;
+            --cinza-leve: #94a3b8;
+            --cinza-bg: #f1f5f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--cinza-texto); background: var(--branco-off); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--azul-primario) 0%, var(--azul-escuro) 100%);
+            color: var(--branco); padding: 0; position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(30,58,138,0.3);
+        }
+        .header-top {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 5%; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header-top .contato-info { font-size: 0.85rem; display: flex; gap: 25px; }
+        .header-top .contato-info i { color: var(--amarelo-primario); margin-right: 6px; }
+        .header-top .social a { color: var(--branco); margin-left: 15px; font-size: 1rem; transition: color 0.3s; }
+        .header-top .social a:hover { color: var(--amarelo-primario); }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon {
+            width: 45px; height: 45px; background: var(--amarelo-primario);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--azul-escuro); font-weight: 700; font-size: 1.2rem;
+        }
+        .logo-text h1 { font-size: 1.6rem; letter-spacing: 1px; }
+        .logo-text span { font-size: 0.75rem; color: var(--amarelo-primario); letter-spacing: 3px; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 35px; list-style: none; }
+        .nav-links a { color: var(--branco); text-decoration: none; font-weight: 500; font-size: 0.95rem; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--amarelo-primario); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--amarelo-primario); }
+        .nav-links a:hover::after { width: 100%; }
+        .btn-reservar {
+            background: var(--amarelo-primario); color: var(--azul-escuro); padding: 10px 28px;
+            border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.9rem;
+            transition: all 0.3s; border: 2px solid var(--amarelo-primario);
+        }
+        .btn-reservar:hover { background: transparent; color: var(--amarelo-primario); }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,58,138,0.8) 100%),
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80') center/cover no-repeat;
+            min-height: 90vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: var(--branco); position: relative;
+        }
+        .hero-content { max-width: 800px; padding: 20px; }
+        .hero-badge {
+            display: inline-block; background: var(--amarelo-primario); color: var(--azul-escuro);
+            padding: 6px 20px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px;
+        }
+        .hero h2 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.2rem; margin-bottom: 35px; opacity: 0.9; font-weight: 300; }
+        .hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            background: var(--amarelo-primario); color: var(--azul-escuro); padding: 14px 35px;
+            border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1rem;
+            transition: all 0.3s; border: 2px solid var(--amarelo-primario); display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn-primary:hover { background: transparent; color: var(--amarelo-primario); transform: translateY(-2px); }
+        .btn-outline {
+            background: transparent; color: var(--branco); padding: 14px 35px;
+            border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 1rem;
+            transition: all 0.3s; border: 2px solid var(--branco); display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn-outline:hover { background: var(--branco); color: var(--azul-primario); }
+        .scroll-down {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            color: var(--branco); font-size: 1.5rem; animation: bounce 2s infinite;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-15px); } 60% { transform: translateX(-50%) translateY(-8px); } }
+
+        /* INFO BAR */
+        .info-bar {
+            background: var(--azul-primario); color: var(--branco); padding: 40px 5%;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center;
+        }
+        .info-item i { font-size: 2.2rem; color: var(--amarelo-primario); margin-bottom: 12px; }
+        .info-item h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .info-item p { font-size: 0.85rem; opacity: 0.8; }
+
+        /* SECTIONS */
+        section { padding: 80px 5%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header .tag {
+            display: inline-block; color: var(--amarelo-escuro); font-weight: 700;
+            text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; margin-bottom: 10px;
+        }
+        .section-header h2 { font-size: 2.5rem; color: var(--azul-primario); margin-bottom: 15px; }
+        .section-header p { color: var(--cinza-leve); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+        .section-header .linha {
+            width: 60px; height: 3px; background: var(--amarelo-primario);
+            margin: 20px auto 0; border-radius: 2px;
+        }
+
+        /* SOBRE */
+        .sobre { background: var(--branco); }
+        .sobre-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto;
+        }
+        .sobre-img { position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 50px rgba(30,58,138,0.15); }
+        .sobre-img img { width: 100%; height: 450px; object-fit: cover; display: block; }
+        .sobre-img::before {
+            content: ''; position: absolute; top: -20px; left: -20px; width: 100%; height: 100%;
+            border: 3px solid var(--amarelo-primario); border-radius: 15px; z-index: -1;
+        }
+        .sobre-texto h3 { font-size: 2rem; color: var(--azul-primario); margin-bottom: 20px; }
+        .sobre-texto p { margin-bottom: 18px; color: var(--cinza-texto); font-size: 1rem; }
+        .sobre-features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+        .sobre-features li { list-style: none; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        .sobre-features li i { color: var(--amarelo-escuro); font-size: 1.1rem; }
+
+        /* ACOMODAÇÕES */
+        .acomodacoes { background: var(--branco-off); }
+        .acomodacoes-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1300px; margin: 0 auto;
+        }
+        .acom-card {
+            background: var(--branco); border-radius: 16px; overflow: hidden;
+            box-shadow: 0 8px 30px rgba(30,58,138,0.08); transition: all 0.4s;
+            border: 1px solid rgba(30,58,138,0.06);
+        }
+        .acom-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(30,58,138,0.15); }
+        .acom-img { position: relative; height: 240px; overflow: hidden; }
+        .acom-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .acom-card:hover .acom-img img { transform: scale(1.08); }
+        .acom-badge {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--amarelo-primario); color: var(--azul-escuro);
+            padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+        }
+        .acom-info { padding: 25px; }
+        .acom-info h3 { font-size: 1.3rem; color: var(--azul-primario); margin-bottom: 10px; }
+        .acom-info p { color: var(--cinza-leve); font-size: 0.9rem; margin-bottom: 18px; }
+        .acom-detalhes { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .acom-detalhes span { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--cinza-texto); background: var(--azul-suave); padding: 5px 12px; border-radius: 20px; }
+        .acom-detalhes span i { color: var(--azul-medio); font-size: 0.8rem; }
+        .acom-preco { display: flex; align-items: baseline; gap: 8px; margin-bottom: 18px; }
+        .acom-preco .valor { font-size: 1.6rem; font-weight: 700; color: var(--azul-primario); }
+        .acom-preco .noite { color: var(--cinza-leve); font-size: 0.9rem; }
+        .btn-acom {
+            display: block; width: 100%; background: var(--azul-primario); color: var(--branco);
+            text-align: center; padding: 12px; border-radius: 10px; text-decoration: none;
+            font-weight: 600; transition: all 0.3s; border: 2px solid var(--azul-primario);
+        }
+        .btn-acom:hover { background: transparent; color: var(--azul-primario); }
+
+        /* GALERIA */
+        .galeria { background: var(--branco); }
+        .galeria-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 250px; gap: 15px; max-width: 1300px; margin: 0 auto;
+        }
+        .galeria-item { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; }
+        .galeria-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .galeria-item:hover img { transform: scale(1.1); }
+        .galeria-item.large { grid-column: span 2; grid-row: span 2; }
+        .galeria-item.tall { grid-row: span 2; }
+        .galeria-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,58,138,0.8), transparent);
+            display: flex; align-items: flex-end; padding: 20px; opacity: 0; transition: opacity 0.3s;
+        }
+        .galeria-item:hover .galeria-overlay { opacity: 1; }
+        .galeria-overlay h4 { color: var(--branco); font-size: 1.1rem; }
+        .galeria-overlay p { color: var(--amarelo-primario); font-size: 0.85rem; }
+
+        /* SERVIÇOS */
+        .servicos { background: linear-gradient(135deg, var(--azul-primario) 0%, var(--azul-escuro) 100%); color: var(--branco); }
+        .servicos .section-header h2 { color: var(--branco); }
+        .servicos .section-header p { color: rgba(255,255,255,0.7); }
+        .servicos-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto;
+        }
+        .serv-card {
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+            padding: 35px 25px; text-align: center; transition: all 0.4s;
+        }
+        .serv-card:hover { background: rgba(255,255,255,0.15); transform: translateY(-5px); }
+        .serv-card i { font-size: 2.5rem; color: var(--amarelo-primario); margin-bottom: 18px; }
+        .serv-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .serv-card p { font-size: 0.9rem; opacity: 0.8; }
+
+        /* DEPOIMENTOS */
+        .depoimentos { background: var(--branco-off); }
+        .depo-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;
+        }
+        .depo-card {
+            background: var(--branco); border-radius: 16px; padding: 35px;
+            box-shadow: 0 5px 25px rgba(30,58,138,0.06); position: relative;
+        }
+        .depo-card::before {
+            content: '"'; position: absolute; top: 20px; left: 25px;
+            font-size: 4rem; color: var(--amarelo-primario); font-family: 'Playfair Display', serif; line-height: 1; opacity: 0.4;
+        }
+        .depo-texto { margin-bottom: 20px; font-style: italic; color: var(--cinza-texto); position: relative; z-index: 1; }
+        .depo-autor { display: flex; align-items: center; gap: 15px; }
+        .depo-autor img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--amarelo-primario); }
+        .depo-autor h4 { font-size: 1rem; color: var(--azul-primario); }
+        .depo-autor .estrelas { color: var(--amarelo-primario); font-size: 0.85rem; }
+
+        /* ========== RESERVA EM ETAPAS (NOVO) ========== */
+        .reserva-section { background: var(--branco); padding: 80px 5%; }
+        .reserva-wrapper {
+            max-width: 700px; margin: 0 auto;
+            background: var(--branco); border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(30,58,138,0.12);
+            border: 1px solid rgba(30,58,138,0.08);
+            overflow: hidden;
+        }
+        .reserva-header {
+            background: linear-gradient(135deg, var(--azul-primario) 0%, var(--azul-escuro) 100%);
+            color: var(--branco); padding: 35px 40px 30px; position: relative;
+        }
+        .reserva-header h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px;
+        }
+        .reserva-step-indicator {
+            font-size: 0.85rem; color: var(--amarelo-primario); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .reserva-instruction {
+            font-size: 0.95rem; opacity: 0.85; margin-top: 5px; font-weight: 300;
+        }
+        .reserva-progress {
+            display: flex; gap: 8px; margin-top: 20px;
+        }
+        .reserva-progress-bar {
+            flex: 1; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px;
+            transition: all 0.4s;
+        }
+        .reserva-progress-bar.active { background: var(--amarelo-primario); }
+
+        .reserva-body { padding: 40px; }
+        .reserva-step { display: none; animation: fadeIn 0.4s ease; }
+        .reserva-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Datepicker estilizado */
+        .reserva-dates {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;
+        }
+        .date-box {
+            background: var(--azul-suave); border: 2px solid var(--azul-claro);
+            border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.3s;
+            position: relative;
+        }
+        .date-box:hover, .date-box:focus-within {
+            border-color: var(--azul-medio); background: var(--branco);
+            box-shadow: 0 4px 15px rgba(37,99,235,0.1);
+        }
+        .date-box-label {
+            display: flex; align-items: center; gap: 10px; font-size: 0.8rem;
+            color: var(--azul-primario); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .date-box-label i { font-size: 1.1rem; color: var(--amarelo-escuro); }
+        .date-box input[type="date"] {
+            width: 100%; border: none; background: transparent;
+            font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 700;
+            color: var(--azul-escuro); cursor: pointer; outline: none;
+        }
+        .date-box input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(20%) sepia(80%) saturate(2000%) hue-rotate(210deg);
+            cursor: pointer;
+        }
+        .date-divider {
+            display: flex; align-items: center; justify-content: center;
+            color: var(--cinza-leve); font-size: 1.2rem;
+        }
+
+        /* Seleção de acomodação na reserva */
+        .reserva-acomodacao { margin-bottom: 25px; }
+        .reserva-acomodacao label {
+            display: block; margin-bottom: 10px; font-weight: 600; color: var(--azul-primario); font-size: 0.9rem;
+        }
+        .reserva-acomodacao select {
+            width: 100%; padding: 14px 18px; border: 2px solid var(--azul-claro); border-radius: 12px;
+            font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--cinza-texto);
+            background: var(--azul-suave); cursor: pointer; transition: all 0.3s; outline: none;
+        }
+        .reserva-acomodacao select:focus { border-color: var(--azul-medio); background: var(--branco); }
+
+        /* Contadores de hóspedes */
+        .guests-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;
+        }
+        .guest-group { background: var(--azul-suave); border-radius: 14px; padding: 20px; }
+        .guest-label {
+            display: block; font-size: 0.85rem; font-weight: 600; color: var(--azul-primario);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+        }
+        .guest-counter {
+            display: flex; align-items: center; justify-content: space-between; gap: 15px;
+        }
+        .guest-counter button {
+            width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--azul-primario);
+            background: var(--branco); color: var(--azul-primario); font-size: 1.2rem; font-weight: 700;
+            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center;
+        }
+        .guest-counter button:hover { background: var(--azul-primario); color: var(--branco); }
+        .guest-counter button:disabled { opacity: 0.4; cursor: not-allowed; }
+        .guest-counter input {
+            width: 50px; text-align: center; border: none; background: transparent;
+            font-size: 1.4rem; font-weight: 700; color: var(--azul-escuro); font-family: 'Inter', sans-serif;
+        }
+        .guest-counter input:focus { outline: none; }
+
+        /* Idades das crianças */
+        .child-ages { display: none; margin-top: 15px; }
+        .child-ages.visible { display: block; animation: fadeIn 0.3s ease; }
+        .child-age-row {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--branco); border-radius: 10px; padding: 12px 15px;
+            margin-bottom: 10px; border: 1px solid var(--azul-claro);
+        }
+        .child-age-row span { font-size: 0.9rem; color: var(--cinza-texto); font-weight: 500; }
+        .child-age-controls { display: flex; align-items: center; gap: 12px; }
+        .child-age-controls button {
+            width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--azul-primario);
+            background: var(--branco); color: var(--azul-primario); font-size: 1rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .child-age-controls button:hover { background: var(--azul-primario); color: var(--branco); }
+        .child-age-controls .age-value { font-weight: 700; color: var(--azul-escuro); min-width: 60px; text-align: center; }
+
+        /* Botões de ação */
+        .reserva-actions {
+            display: flex; gap: 15px; margin-top: 30px;
+        }
+        .reserva-actions button {
+            flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 0.95rem;
+            font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-voltar {
+            background: var(--cinza-bg); color: var(--cinza-texto); border: 2px solid var(--cinza-bg);
+        }
+        .btn-voltar:hover { background: var(--branco); border-color: var(--cinza-leve); }
+        .btn-avancar {
+            background: var(--azul-primario); color: var(--branco); border: 2px solid var(--azul-primario);
+        }
+        .btn-avancar:hover { background: var(--azul-escuro); border-color: var(--azul-escuro); transform: translateY(-2px); }
+        .btn-pesquisar {
+            background: var(--amarelo-primario); color: var(--azul-escuro); border: 2px solid var(--amarelo-primario);
+        }
+        .btn-pesquisar:hover { background: var(--amarelo-escuro); border-color: var(--amarelo-escuro); transform: translateY(-2px); }
+
+        /* Resumo da reserva */
+        .reserva-resumo {
+            background: linear-gradient(135deg, var(--azul-suave) 0%, var(--amarelo-claro) 100%);
+            border-radius: 14px; padding: 20px; margin-top: 20px;
+            border-left: 4px solid var(--amarelo-primario);
+        }
+        .reserva-resumo h4 { color: var(--azul-primario); font-size: 1rem; margin-bottom: 10px; font-family: 'Inter', sans-serif; }
+        .resumo-item { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9rem; border-bottom: 1px dashed rgba(30,58,138,0.15); }
+        .resumo-item:last-child { border-bottom: none; font-weight: 700; color: var(--azul-escuro); font-size: 1rem; margin-top: 5px; padding-top: 10px; border-top: 2px solid var(--azul-primario); }
+
+        /* FOOTER */
+        footer {
+            background: var(--azul-escuro); color: var(--branco); padding: 60px 5% 25px;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; max-width: 1300px; margin: 0 auto 40px;
+        }
+        .footer-brand .logo-icon { margin-bottom: 15px; }
+        .footer-brand p { opacity: 0.7; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.7; }
+        .footer-brand .social a { color: var(--branco); margin-right: 15px; font-size: 1.1rem; transition: color 0.3s; }
+        .footer-brand .social a:hover { color: var(--amarelo-primario); }
+        .footer-col h4 { color: var(--amarelo-primario); font-size: 1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .footer-col ul li a:hover { color: var(--amarelo-primario); }
+        .footer-bottom {
+            text-align: center; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem; opacity: 0.6;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 1024px) {
+            .sobre-grid { grid-template-columns: 1fr; }
+            .galeria-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+            .galeria-item.large { grid-column: span 2; grid-row: span 1; }
+            .galeria-item.tall { grid-row: span 1; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .reserva-dates { grid-template-columns: 1fr; }
+            .date-divider { transform: rotate(90deg); padding: 5px 0; }
+        }
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .section-header h2 { font-size: 1.8rem; }
+            .galeria-grid { grid-template-columns: 1fr; }
+            .galeria-item.large { grid-column: span 1; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .reserva-header { padding: 25px; }
+            .reserva-body { padding: 25px; }
+            .guests-grid { grid-template-columns: 1fr; }
+            .reserva-actions { flex-direction: column; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-top">
+        <div class="contato-info">
+            <span><i class="fas fa-phone"></i> (11) 99999-9999</span>
+            <span><i class="fas fa-envelope"></i> contato@pousadarmarques.com.br</span>
+            <span><i class="fas fa-map-marker-alt"></i> Av. Beira Mar, 123 - Praia do Sol</span>
+        </div>
+        <div class="social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">R</div>
+            <div class="logo-text">
+                <h1>Pousada R Marques</h1>
+                <span>Hospitalidade & Conforto</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#acomodacoes">Acomodações</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#reserva">Reserva</a></li>
+        </ul>
+        <a href="#reserva" class="btn-reservar"><i class="fas fa-calendar-check"></i> Reservar</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+    <div class="hero-content">
+        <div class="hero-badge">Bem-vindo à Pousada R Marques</div>
+        <h2>Descubra o Paraíso entre o Mar e o Conforto</h2>
+        <p>Experiência única de hospedagem com vista panorâmica, atendimento premium e momentos inesquecíveis à beira-mar.</p>
+        <div class="hero-btns">
+            <a href="#acomodacoes" class="btn-primary"><i class="fas fa-bed"></i> Ver Acomodações</a>
+            <a href="#reserva" class="btn-outline"><i class="fas fa-calendar-alt"></i> Reservar Agora</a>
+        </div>
+    </div>
+    <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+    <div class="info-item"><i class="fas fa-wifi"></i><h4>Wi-Fi Grátis</h4><p>Conexão de alta velocidade em todas as áreas</p></div>
+    <div class="info-item"><i class="fas fa-utensils"></i><h4>Café da Manhã</h4><p>Buffet completo com produtos regionais</p></div>
+    <div class="info-item"><i class="fas fa-swimming-pool"></i><h4>Piscina</h4><p>Piscina adulto e infantil com vista para o mar</p></div>
+    <div class="info-item"><i class="fas fa-parking"></i><h4>Estacionamento</h4><p>Estacionamento privativo e seguro</p></div>
+</div>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+    <div class="section-header">
+        <span class="tag">Nossa História</span>
+        <h2>Sobre a Pousada R Marques</h2>
+        <p>Um refúgio de tranquilidade e elegância à beira-mar, criado para proporcionar as melhores experiências aos nossos hóspedes.</p>
+        <div class="linha"></div>
+    </div>
+    <div class="sobre-grid">
+        <div class="sobre-img">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" alt="Pousada R Marques">
+        </div>
+        <div class="sobre-texto">
+            <h3>Experiência de Hospedagem Premium</h3>
+            <p>A Pousada R Marques nasceu do sonho de oferecer uma experiência única de hospedagem, onde o conforto encontra a natureza em perfeita harmonia. Localizada em uma das praias mais encantadoras da região, nossa pousada é o destino ideal para quem busca descanso, romance ou aventura.</p>
+            <p>Com uma arquitetura que valoriza a integração com o ambiente natural, cada detalhe foi pensado para proporcionar bem-estar e momentos inesquecíveis.</p>
+            <ul class="sobre-features">
+                <li><i class="fas fa-check-circle"></i> Vista panorâmica para o mar</li>
+                <li><i class="fas fa-check-circle"></i> Quartos com ar-condicionado</li>
+                <li><i class="fas fa-check-circle"></i> Atendimento 24 horas</li>
+                <li><i class="fas fa-check-circle"></i> Acesso direto à praia</li>
+                <li><i class="fas fa-check-circle"></i> Pet friendly</li>
+                <li><i class="fas fa-check-circle"></i> Passeios guiados</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ACOMODAÇÕES -->
+<section class="acomodacoes" id="acomodacoes">
+    <div class="section-header">
+        <span class="tag">Hospede-se Conosco</span>
+        <h2>Nossas Acomodações</h2>
+        <p>Quartos e suítes cuidadosamente decorados para garantir o máximo de conforto durante a sua estadia.</p>
+        <div class="linha"></div>
+    </div>
+    <div class="acomodacoes-grid">
+        <div class="acom-card">
+            <div class="acom-img">
+                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Suíte Premium">
+                <span class="acom-badge">Mais Popular</span>
+            </div>
+            <div class="acom-info">
+                <h3>Suíte Premium</h3>
+                <p>Espaçosa suíte com vista privilegiada para o mar, decoração sofisticada e área de estar privativa.</p>
+                <div class="acom-detalhes">
+                    <span><i class="fas fa-user"></i> 2 Hóspedes</span>
+                    <span><i class="fas fa-bed"></i> 1 Cama King</span>
+                    <span><i class="fas fa-expand"></i> 45m²</span>
+                    <span><i class="fas fa-water"></i> Vista Mar</span>
+                </div>
+                <div class="acom-preco"><span class="valor">R$ 480</span><span class="noite">/ noite</span></div>
+                <a href="#reserva" class="btn-acom">Reservar Agora</a>
+            </div>
+        </div>
+        <div class="acom-card">
+            <div class="acom-img">
+                <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&q=80" alt="Suíte Standard">
+            </div>
+            <div class="acom-info">
+                <h3>Suíte Standard</h3>
+                <p>Conforto e praticidade em um ambiente aconchegante, perfeita para casais e viagens de negócios.</p>
+                <div class="acom-detalhes">
+                    <span><i class="fas fa-user"></i> 2 Hóspedes</span>
+                    <span><i class="fas fa-bed"></i> 1 Cama Queen</span>
+                    <span><i class="fas fa-expand"></i> 32m²</span>
+                    <span><i class="fas fa-snowflake"></i> Ar-condicionado</span>
+                </div>
+                <div class="acom-preco"><span class="valor">R$ 320</span><span class="noite">/ noite</span></div>
+                <a href="#reserva" class="btn-acom">Reservar Agora</a>
+            </div>
+        </div>
+        <div class="acom-card">
+            <div class="acom-img">
+                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" alt="Quarto Família">
+                <span class="acom-badge">Ideal para Famílias</span>
+            </div>
+            <div class="acom-info">
+                <h3>Quarto Família</h3>
+                <p>Amplo quarto com duas camas de casal, ideal para famílias com crianças ou grupos de amigos.</p>
+                <div class="acom-detalhes">
+                    <span><i class="fas fa-user"></i> 4 Hóspedes</span>
+                    <span><i class="fas fa-bed"></i> 2 Camas Queen</span>
+                    <span><i class="fas fa-expand"></i> 55m²</span>
+                    <span><i class="fas fa-tv"></i> Smart TV</span>
+                </div>
+                <div class="acom-preco"><span class="valor">R$ 580</span><span class="noite">/ noite</span></div>
+                <a href="#reserva" class="btn-acom">Reservar Agora</a>
+            </div>
+        </div>
+        <div class="acom-card">
+            <div class="acom-img">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="Chalé Luxo">
+                <span class="acom-badge">Experiência Única</span>
+            </div>
+            <div class="acom-info">
+                <h3>Chalé Luxo</h3>
+                <p>Chalé independente com hidromassagem privativa, deck com rede e vista exclusiva para o pôr do sol.</p>
+                <div class="acom-detalhes">
+                    <span><i class="fas fa-user"></i> 2 Hóspedes</span>
+                    <span><i class="fas fa-bed"></i> 1 Cama King</span>
+                    <span><i class="fas fa-expand"></i> 60m²</span>
+                    <span><i class="fas fa-hot-tub"></i> Hidromassagem</span>
+                </div>
+                <div class="acom-preco"><span class="valor">R$ 720</span><span class="noite">/ noite</span></div>
+                <a href="#reserva" class="btn-acom">Reservar Agora</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALERIA -->
+<section class="galeria" id="galeria">
+    <div class="section-header">
+        <span class="tag">Nosso Espaço</span>
+        <h2>Galeria de Fotos</h2>
+        <p>Conheça cada cantinho da Pousada R Marques através das nossas imagens.</p>
+        <div class="linha"></div>
+    </div>
+    <div class="galeria-grid">
+        <div class="galeria-item large">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80" alt="Vista Aérea">
+            <div class="galeria-overlay"><div><h4>Vista Aérea da Pousada</h4><p>Praia do Sol</p></div></div>
+        </div>
+        <div class="galeria-item">
+            <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&q=80" alt="Piscina">
+            <div class="galeria-overlay"><div><h4>Piscina Infinita</h4><p>Vista para o mar</p></div></div>
+        </div>
+        <div class="galeria-item tall">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80" alt="Restaurante">
+            <div class="galeria-overlay"><div><h4>Restaurante</h4><p>Gastronomia local</p></div></div>
+        </div>
+        <div class="galeria-item">
+            <img src="https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=600&q=80" alt="Área de Lazer">
+            <div class="galeria-overlay"><div><h4>Área de Lazer</h4><p>Descanso e diversão</p></div></div>
+        </div>
+        <div class="galeria-item">
+            <img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=600&q=80" alt="Spa">
+            <div class="galeria-overlay"><div><h4>Spa & Bem-estar</h4><p>Massagens e tratamentos</p></div></div>
+        </div>
+        <div class="galeria-item">
+            <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80" alt="Praia">
+            <div class="galeria-overlay"><div><h4>Acesso à Praia</h4><p>Mar cristalino</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos" id="servicos">
+    <div class="section-header">
+        <span class="tag" style="color: var(--amarelo-primario);">Tudo para Você</span>
+        <h2>Serviços & Comodidades</h2>
+        <p>Oferecemos uma completa estrutura para tornar sua estadia perfeita em todos os detalhes.</p>
+        <div class="linha"></div>
+    </div>
+    <div class="servicos-grid">
+        <div class="serv-card"><i class="fas fa-concierge-bell"></i><h3>Recepção 24h</h3><p>Atendimento personalizado e disponível a qualquer hora do dia ou da noite.</p></div>
+        <div class="serv-card"><i class="fas fa-utensils"></i><h3>Restaurante</h3><p>Culinária regional e internacional preparada por chefs especializados.</p></div>
+        <div class="serv-card"><i class="fas fa-spa"></i><h3>Spa & Massagem</h3><p>Tratamentos relaxantes e terapêuticos para renovar suas energias.</p></div>
+        <div class="serv-card"><i class="fas fa-dumbbell"></i><h3>Academia</h3><p>Espaço fitness completo com equipamentos modernos e vista para o mar.</p></div>
+        <div class="serv-card"><i class="fas fa-bicycle"></i><h3>Passeios Guiados</h3><p>Trilhas ecológicas, passeios de barco e mergulho com guias locais.</p></div>
+        <div class="serv-card"><i class="fas fa-glass-cheers"></i><h3>Bar & Lounge</h3><p>Drinks especiais e ambiente descontraído para momentos especiais.</p></div>
+    </div>
+</section>
+
+<!-- ========== RESERVA EM ETAPAS (NOVO COMPONENTE) ========== -->
+<section class="reserva-section" id="reserva">
+    <div class="section-header">
+        <span class="tag">Reserve Já</span>
+        <h2>Faça sua Reserva</h2>
+        <p>Escolha as melhores datas e configure sua estadia na Pousada R Marques em poucos passos.</p>
+        <div class="linha"></div>
+    </div>
+
+    <div class="reserva-wrapper">
+        <!-- Header da Reserva -->
+        <div class="reserva-header">
+            <h3><i class="fas fa-hotel" style="margin-right:10px; color:var(--amarelo-primario);"></i>Pousada R Marques</h3>
+            <p class="reserva-step-indicator" id="stepIndicator">Etapa 1 de 2: Período</p>
+            <p class="reserva-instruction" id="stepInstruction">Escolha os melhores dias para vir</p>
+            <div class="reserva-progress">
+                <div class="reserva-progress-bar active" id="prog1"></div>
+                <div class="reserva-progress-bar" id="prog2"></div>
+            </div>
+        </div>
+
+        <!-- Corpo da Reserva -->
+        <div class="reserva-body">
+            <form id="bookingForm" action="#" method="POST">
+
+                <!-- ETAPA 1: PERÍODO E ACOMODAÇÃO -->
+                <div class="reserva-step active" id="step1">
+                    <div class="reserva-dates">
+                        <div class="date-box">
+                            <div class="date-box-label"><i class="fas fa-calendar-check"></i> Entrada</div>
+                            <input type="date" id="checkin" name="checkin" required>
+                        </div>
+                        <div class="date-divider"><i class="fas fa-arrow-right"></i></div>
+                        <div class="date-box">
+                            <div class="date-box-label"><i class="fas fa-calendar-minus"></i> Saída</div>
+                            <input type="date" id="checkout" name="checkout" required>
+                        </div>
+                    </div>
+
+                    <div class="reserva-acomodacao">
+                        <label for="acomodacao"><i class="fas fa-bed" style="margin-right:8px; color:var(--amarelo-escuro);"></i>Tipo de Acomodação</label>
+                        <select id="acomodacao" name="acomodacao" required>
+                            <option value="">Selecione a acomodação...</option>
+                            <option value="suite-premium" data-preco="480">Suíte Premium — R$ 480/noite</option>
+                            <option value="suite-standard" data-preco="320">Suíte Standard — R$ 320/noite</option>
+                            <option value="quarto-familia" data-preco="580">Quarto Família — R$ 580/noite</option>
+                            <option value="chale-luxo" data-preco="720">Chalé Luxo — R$ 720/noite</option>
+                        </select>
+                    </div>
+
+                    <div class="reserva-resumo" id="resumoStep1" style="display:none;">
+                        <h4><i class="fas fa-receipt" style="margin-right:8px;"></i>Resumo da Estadia</h4>
+                        <div class="resumo-item"><span>Noites:</span><span id="resumoNoites">—</span></div>
+                        <div class="resumo-item"><span>Diária:</span><span id="resumoDiaria">—</span></div>
+                        <div class="resumo-item"><span>Total Estimado:</span><span id="resumoTotal">—</span></div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 2: HÓSPEDES -->
+                <div class="reserva-step" id="step2">
+                    <div class="guests-grid">
+                        <div class="guest-group">
+                            <label class="guest-label">Adulto(s)</label>
+                            <div class="guest-counter">
+                                <button type="button" id="btnRemoveAdult" onclick="updateGuest('adults', -1)">−</button>
+                                <input type="text" id="adultsCount" name="adults" value="2" readonly>
+                                <button type="button" id="btnAddAdult" onclick="updateGuest('adults', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="guest-group">
+                            <label class="guest-label">Criança(s)</label>
+                            <div class="guest-counter">
+                                <button type="button" id="btnRemoveChild" onclick="updateGuest('children', -1)">−</button>
+                                <input type="text" id="childrenCount" name="children" value="0" readonly>
+                                <button type="button" id="btnAddChild" onclick="updateGuest('children', 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Idades das crianças (dinâmico) -->
+                    <div class="child-ages" id="childAgesContainer">
+                        <label class="guest-label" style="margin-bottom:12px;"><i class="fas fa-child" style="margin-right:6px; color:var(--amarelo-escuro);"></i>Idades das Crianças</label>
+                        <div id="childAgeList"></div>
+                    </div>
+
+                    <div class="reserva-resumo" id="resumoStep2">
+                        <h4><i class="fas fa-users" style="margin-right:8px;"></i>Resumo dos Hóspedes</h4>
+                        <div class="resumo-item"><span>Adultos:</span><span id="resumoAdults">2</span></div>
+                        <div class="resumo-item"><span>Crianças:</span><span id="resumoChildren">0</span></div>
+                        <div class="resumo-item"><span>Total de Hóspedes:</span><span id="resumoGuests">2</span></div>
+                    </div>
+                </div>
+
+                <!-- AÇÕES -->
+                <div class="reserva-actions" id="actionsStep1">
+                    <button type="button" class="btn-avancar" onclick="goToStep(2)">Avançar <i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div class="reserva-actions" id="actionsStep2" style="display:none;">
+                    <button type="button" class="btn-voltar" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> Voltar</button>
+                    <button type="submit" class="btn-pesquisar"><i class="fas fa-search"></i> Pesquisar Disponibilidade</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="logo">
+                <div class="logo-icon">R</div>
+                <div class="logo-text">
+                    <h1 style="font-size:1.3rem;">Pousada R Marques</h1>
+                    <span>Hospitalidade & Conforto</span>
+                </div>
+            </div>
+            <p>A Pousada R Marques é sinônimo de excelência em hospitalidade. Localizada em um dos cenários mais deslumbrantes da costa, oferecemos uma experiência única de conforto, natureza e atendimento premium.</p>
+            <div class="social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Links Rápidos</h4>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#acomodacoes">Acomodações</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Serviços</h4>
+            <ul>
+                <li><a href="#">Restaurante</a></li>
+                <li><a href="#">Spa & Massagem</a></li>
+                <li><a href="#">Passeios Guiados</a></li>
+                <li><a href="#">Eventos & Festas</a></li>
+                <li><a href="#">Transfer</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p style="opacity:0.7; font-size:0.9rem; margin-bottom:15px;">Cadastre-se para receber ofertas exclusivas e novidades.</p>
+            <form style="display:flex; gap:10px;">
+                <input type="email" placeholder="Seu e-mail" style="flex:1; padding:10px 15px; border-radius:8px; border:none; font-family:'Inter',sans-serif;">
+                <button type="submit" style="background:var(--amarelo-primario); color:var(--azul-escuro); border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Pousada R Marques. Todos os direitos reservados. | Desenvolvido com <i class="fas fa-heart" style="color:var(--amarelo-primario);"></i></p>
+    </div>
+</footer>
+
+<script>
+    // ===== NAVEGAÇÃO POR ETAPAS =====
+    let currentStep = 1;
+
+    function goToStep(step) {
+        if (step === 2) {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const acom = document.getElementById('acomodacao').value;
+            if (!checkin || !checkout) { alert('Por favor, selecione as datas de entrada e saída.'); return; }
+            if (!acom) { alert('Por favor, selecione uma acomodação.'); return; }
+            if (new Date(checkin) >= new Date(checkout)) { alert('A data de saída deve ser posterior à entrada.'); return; }
+        }
+
+        document.querySelectorAll('.reserva-step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+
+        document.getElementById('actionsStep1').style.display = step === 1 ? 'flex' : 'none';
+        document.getElementById('actionsStep2').style.display = step === 2 ? 'flex' : 'none';
+
+        document.getElementById('prog1').classList.toggle('active', step >= 1);
+        document.getElementById('prog2').classList.toggle('active', step >= 2);
+
+        document.getElementById('stepIndicator').textContent = step === 1 ? 'Etapa 1 de 2: Período' : 'Etapa 2 de 2: Hóspedes';
+        document.getElementById('stepInstruction').textContent = step === 1 ? 'Escolha os melhores dias para vir' : 'Quem vai acompanhar você?';
+
+        currentStep = step;
+        updateResumo();
+    }
+
+    // ===== CONTADORES DE HÓSPEDES =====
+    const guests = { adults: 2, children: 0 };
+    const maxGuests = { adults: 6, children: 3 };
+
+    function updateGuest(type, delta) {
+        const newVal = guests[type] + delta;
+        if (newVal < 0 || newVal > maxGuests[type]) return;
+        guests[type] = newVal;
+        document.getElementById(type + 'Count').value = newVal;
+        document.getElementById('btnRemove' + (type === 'adults' ? 'Adult' : 'Child')).disabled = newVal === 0;
+        document.getElementById('btnAdd' + (type === 'adults' ? 'Adult' : 'Child')).disabled = newVal === maxGuests[type];
+        updateChildAges();
+        updateResumo();
+    }
+
+    // ===== IDADES DAS CRIANÇAS =====
+    const childAges = [];
+
+    function updateChildAges() {
+        const container = document.getElementById('childAgesContainer');
+        const list = document.getElementById('childAgeList');
+
+        if (guests.children === 0) {
+            container.classList.remove('visible');
+            return;
+        }
+
+        // Ajusta array de idades
+        while (childAges.length < guests.children) childAges.push(0);
+        while (childAges.length > guests.children) childAges.pop();
+
+        list.innerHTML = '';
+        childAges.forEach((age, idx) => {
+            const row = document.createElement('div');
+            row.className = 'child-age-row';
+            row.innerHTML = `
+                <span>Criança ${idx + 1}</span>
+                <div class="child-age-controls">
+                    <button type="button" onclick="updateChildAge(${idx}, -1)">−</button>
+                    <span class="age-value" id="ageDisplay${idx}">${age} ano${age !== 1 ? 's' : ''}</span>
+                    <button type="button" onclick="updateChildAge(${idx}, 1)">+</button>
+                </div>
+                <input type="hidden" name="child_age_${idx}" id="childAgeInput${idx}" value="${age}">
+            `;
+            list.appendChild(row);
+        });
+
+        container.classList.add('visible');
+    }
+
+    function updateChildAge(idx, delta) {
+        const newAge = Math.max(0, Math.min(17, childAges[idx] + delta));
+        childAges[idx] = newAge;
+        document.getElementById('ageDisplay' + idx).textContent = newAge + ' ano' + (newAge !== 1 ? 's' : '');
+        document.getElementById('childAgeInput' + idx).value = newAge;
+    }
+
+    // ===== RESUMO =====
+    function updateResumo() {
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const acomSelect = document.getElementById('acomodacao');
+        const preco = acomSelect.selectedOptions[0]?.dataset?.preco || 0;
+
+        if (checkin && checkout && preco) {
+            const d1 = new Date(checkin);
+            const d2 = new Date(checkout);
+            const noites = Math.max(1, Math.round((d2 - d1) / (1000 * 60 * 60 * 24)));
+            const total = noites * parseInt(preco);
+
+            document.getElementById('resumoNoites').textContent = noites + ' noite' + (noites !== 1 ? 's' : '');
+            document.getElementById('resumoDiaria').textContent = 'R$ ' + parseInt(preco).toLocaleString('pt-BR');
+            document.getElementById('resumoTotal').textContent = 'R$ ' + total.toLocaleString('pt-BR');
+            document.getElementById('resumoStep1').style.display = 'block';
+        }
+
+        document.getElementById('resumoAdults').textContent = guests.adults;
+        document.getElementById('resumoChildren').textContent = guests.children;
+        document.getElementById('resumoGuests').textContent = (guests.adults + guests.children);
+    }
+
+    // ===== EVENT LISTENERS =====
+    document.getElementById('checkin').addEventListener('change', function() {
+        const checkout = document.getElementById('checkout');
+        if (!checkout.value || new Date(checkout.value) <= new Date(this.value)) {
+            const nextDay = new Date(this.value);
+            nextDay.setDate(nextDay.getDate() + 1);
+            checkout.value = nextDay.toISOString().split('T')[0];
+        }
+        updateResumo();
+    });
+    document.getElementById('checkout').addEventListener('change', updateResumo);
+    document.getElementById('acomodacao').addEventListener('change', updateResumo);
+
+    // Data mínima = hoje
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('checkin').min = today;
+    document.getElementById('checkout').min = today;
+
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+
+    // ===== ENVIO DA RESERVA (sem backend no GitHub Pages) =====
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const acom = document.getElementById('acomodacao').selectedOptions[0]?.text || '';
+        const noites = document.getElementById('resumoNoites').textContent;
+        const total = document.getElementById('resumoTotal').textContent;
+        const totalHospedes = document.getElementById('resumoGuests').textContent;
+
+        const mensagem = 'Olá! Gostaria de solicitar uma reserva na Pousada R Marques:%0A%0A' +
+            '• Acomodação: ' + acom + '%0A' +
+            '• Entrada: ' + checkin + '%0A' +
+            '• Saída: ' + checkout + '%0A' +
+            '• ' + noites + '%0A' +
+            '• Hóspedes: ' + totalHospedes + ' (adultos: ' + guests.adults + ', crianças: ' + guests.children + ')%0A' +
+            '• Total estimado: ' + total + '%0A%0A' +
+            'Aguardo confirmação de disponibilidade. Obrigado!';
+
+        // Abre o WhatsApp com a resumo preenchido (troque o número abaixo pelo seu)
+        window.open('https://wa.me/5511999999999?text=' + mensagem, '_blank');
+    });
+
+    // Inicializa
+    updateResumo();
+</script>
+
+</body>
+</html>
