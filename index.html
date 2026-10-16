@@ -1007,14 +1007,24 @@
         const total = document.getElementById('resumoTotal').textContent;
         const totalHospedes = document.getElementById('resumoGuests').textContent;
 
-        const mensagem = 'Olá! Gostaria de solicitar uma reserva na Pousada R Marques:%0A%0A' +
-            '• Acomodação: ' + acom + '%0A' +
-            '• Entrada: ' + checkin + '%0A' +
-            '• Saída: ' + checkout + '%0A' +
-            '• ' + noites + '%0A' +
-            '• Hóspedes: ' + totalHospedes + ' (adultos: ' + guests.adults + ', crianças: ' + guests.children + ')%0A' +
-            '• Total estimado: ' + total + '%0A%0A' +
-            'Aguardo confirmação de disponibilidade. Obrigado!';
+        
+const formatarData = (data) => {
+    const [ano, mes, dia] = data.split('-');
+    return `${dia}/${mes}/${ano}`;
+};
+
+const mensagem =
+    'Olá! Gostaria de solicitar uma reserva na Pousada R Marques.\n\n' +
+    '🏨 Acomodação: ' + acom + '\n' +
+    '📅 Entrada: ' + formatarData(checkin) + '\n' +
+    '📅 Saída: ' + formatarData(checkout) + '\n' +
+    '🌙 ' + noites + '\n' +
+    '👥 Hóspedes: ' + totalHospedes +
+    ' (adultos: ' + guests.adults +
+    ', crianças: ' + guests.children + ')\n' +
+    '💰 Total estimado: ' + total + '\n\n' +
+    'Aguardo confirmação de disponibilidade. Obrigado!';
+
 
         // Abre o WhatsApp com a resumo preenchido (troque o número abaixo pelo seu)
         
